@@ -1,4 +1,4 @@
-import mysql, {Pool} from 'mysql';
+import mysql, {Pool} from 'promise-mysql';
 import env from 'dotenv';
 
 env.config();
