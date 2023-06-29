@@ -1,24 +1,38 @@
 package lk.ijse.dep10.smsspringbootbackend.api;
 
+import lk.ijse.dep10.smsspringbootbackend.business.StudentBO;
+import lk.ijse.dep10.smsspringbootbackend.dto.StudentDTO;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @CrossOrigin
 @RequestMapping("/api/v1/students")
 public class StudentHttpController {
 
+    private final StudentBO studentBO;
+
+    public StudentHttpController(StudentBO studentBO) {
+        this.studentBO = studentBO;
+    }
+
     @GetMapping
-    public String getAllStudents() {
-        return "<h1>Get Students</h1>";
+    public List<StudentDTO> getAllStudents() throws Exception {
+        return studentBO.getAllStudents();
     }
 
-    @PostMapping
-    public String saveStudent() {
-        return "<h1>Save Student</h1>";
+    @PostMapping(consumes = "application/json")
+    @ResponseStatus(HttpStatus.CREATED)
+    public StudentDTO saveStudent(@RequestBody @Valid StudentDTO studentDTO) throws Exception {
+        return studentBO.saveStudent(studentDTO);
     }
 
-    @DeleteMapping()
-    public String deleteStudent() {
-        return "<h1>Delete Student</h1>";
+    @DeleteMapping("/{studentId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteStudent(@PathVariable("studentId") Integer studentId) throws Exception {
+        studentBO.deleteStudent(studentId);
     }
 }
