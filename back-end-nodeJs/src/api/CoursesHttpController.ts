@@ -1,7 +1,7 @@
 import express from "express";
 import {datasource} from "../db/dbcp";
 
-export const course=express.Router();
+export const router=express.Router();
 
 type Course= {
     "id":string,
@@ -9,17 +9,17 @@ type Course= {
     "duration":number
 }
 
-course.get('/',async (req, res)=>{
-    const student=await datasource.query('SELECT * FROM course ');
+router.get('/',async (req, res)=>{
+    const course=await datasource.query('SELECT * FROM course ');
     res.json(course);
 });
 
-course.delete('/:id',async (req, res)=>{
+router.delete('/:id',async (req, res)=>{
     const result=await datasource.query('DELETE FROM course WHERE id=?',[req.params.id])
     res.sendStatus(result.affectedRows ? 204:404);
 });
 
-course.patch('/:id',async (req, res)=>{
+router.patch('/:id',async (req, res)=>{
     const course=req.body as Course;
     if (!course.description?.trim()){
         res.sendStatus(400);

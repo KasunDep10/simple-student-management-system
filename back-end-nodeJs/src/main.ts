@@ -1,6 +1,6 @@
 import express, {json} from "express";
-import {course as CoursesHttpController} from "./api/CoursesHttpController"
-import {student as StudentHttpController} from "./api/StudentHttpController"
+import {router as CoursesHttpController} from "./api/CoursesHttpController"
+// import {student as StudentHttpController} from "./api/StudentHttpController"
 import cors from 'cors';
 
 const app = express();
