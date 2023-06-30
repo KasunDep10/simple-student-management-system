@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { ManageStudentsComponent } from './view/manage-students/manage-students.component';
 import { ManageCoursesComponent } from './view/manage-courses/manage-courses.component';
 import {RouterModule, Routes} from "@angular/router";
+import {HttpClientModule} from "@angular/common/http";
 
 const routes:Routes=[
   {
@@ -24,7 +25,8 @@ const routes:Routes=[
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
